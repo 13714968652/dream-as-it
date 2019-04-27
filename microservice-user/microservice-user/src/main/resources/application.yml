@@ -1,0 +1,77 @@
+server:
+  port: 8080
+  servlet:
+    context-path: 
+    
+#mysql数据库连接
+spring:
+  datasource:
+    platform: mysql
+    username: root
+    url: jdbc:mysql://localhost:3306/one?serverTimezone=UTC
+    password: 13714968652
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    
+    # 下面为连接池的补充设置，应用到上面所有数据源中
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall,log4j
+    logSlowSql: true
+    #ip 白名单 不加 则默认全部
+    allow: 192.168.1.4
+    #ip 黑名单
+    deny: 
+    #慢sql 显示毫秒数
+    slowSqlMillis: 3000
+    mergeSql: true
+    #禁用HTML页面上的“Rest All”功能
+    resetEnable: false
+    
+    
+  #启动profilies
+  profiles:
+    active: dev
+  
+  #jpa配置
+  jpa:
+    show-sql: true
+    database: mysql
+    
+    
+mybatis:
+  #mapper.xml所在位置
+  mapper-locations: classpath:conf/*.xml
+  type-aliases-package: com.it.xb.microserviceuser.entity
+  
+# 日志级别 level后面 加包名
+logging: 
+  level: 
+    # root下打印error日志
+    root: error
+    # 包下打印info日志
+    com.it.xb.microserviceuser: info
+    # DAO打印debug日志
+    com.it.xb.microserviceuser.dao : debug
+    org.hibernate: debug
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+   
+  
+  
+    
+
+
+
+

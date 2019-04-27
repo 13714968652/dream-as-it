@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.it.xb.microserviceuser.dao.UserDAO">
+    <resultMap type="user" id="userMap">
+        <id property="id" javaType="java.lang.String" column="id" />
+        <result javaType="java.lang.String" property="name" column="name" />
+    </resultMap>
+   
+    <!-- 单表查询info数据 -->
+    <select id="selectByPrimary" resultMap="userMap" >
+        select * from user where id=#{id}
+    </select>
+</mapper>
